@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:08:00 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/24 16:36:43 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:08:20 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	data_init(t_table *table)
 	i = -1
 	table->end_simulation = false;
 	table->philos = safe_malloc(sizeof(t_philo) * table->philo_nbr);
+	safe_mutex_handle(table->table_mutex, INIT);
 	table->forks = safe_malloc(sizeof(t_fork) * table->philo_nbr);
 	while (++i < table->philo_nbr)
 	{

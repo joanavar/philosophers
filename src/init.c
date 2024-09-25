@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:03:33 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/24 17:24:10 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:50:17 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	dinner_start(t_table *table)
 {
 	int i;
 
-	i - -1;
+	i = -1;
 	if (0 == table->nbr->limits->meals)
 		return ;
 	else if (1 == table->philo_nbr)

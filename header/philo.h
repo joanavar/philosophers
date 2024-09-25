@@ -53,6 +53,7 @@ typedef	struct s_table
 	long	start_simulation;
 	bool	end_simulation;// full_meals or die philo
 	bool	all_threads_ready;
+	t_mtx	table_mutex;
 	t_fork	*forks;// arrany forks
 	t_philo	*philos;// arrany philos
 
