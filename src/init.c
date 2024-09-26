@@ -12,6 +12,15 @@
 
 #include "philo.h"
 
+void	*dinner_simulation(void *data)
+{
+	t_philo *philo;
+
+	philo = (philo*)data;
+	wait_all_threads(philo->table)//PREGUNTAR
+	
+}
+
 void	dinner_start(t_table *table)
 {
 	int i;
@@ -30,4 +39,5 @@ void	dinner_start(t_table *table)
 		}
 
 	}
+	set_bool(&table->table_mutex, &table->all_threads_ready, true);
 }

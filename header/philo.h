@@ -24,6 +24,13 @@ typedef enum e_opcode
 	DETACH,
 }			t_opcode;
 
+typedef enum e_time_code
+{
+	SECOND,
+	MILLISECOND,
+	MICROSECOND,
+}			t_time_code;
+
 typedef struct s_fork
 {
 	t_mtx	fork;
@@ -86,6 +93,9 @@ bool	get_bool(t_mtx *mutex, bool *value);
 void	set_long(t_mtx *mutex, long *dst, long value);
 long	get_long(t_mtx *mutex, long *value);
 bool	simulation_finished(t_table *table);
+
+//syncro.utils.c
+void    wait_all_threads(t_table *table);
 
 
 #endif // DEBUG
