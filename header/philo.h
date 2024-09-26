@@ -54,6 +54,7 @@ typedef	struct s_table
 	bool	end_simulation;// full_meals or die philo
 	bool	all_threads_ready;
 	t_mtx	table_mutex;
+	t_mtx	write_mutex;
 	t_fork	*forks;// arrany forks
 	t_philo	*philos;// arrany philos
 
@@ -78,6 +79,13 @@ void	safe_thread_handle(pthread_t *thread, void *(foo)(void *),
 
 //data.init.c
 void	data_init(t_table *table);
+
+//setters_getters.c
+void	set_bool(t_mtx *mutex, bool *dst, bool value);
+bool	get_bool(t_mtx *mutex, bool *value);
+void	set_long(t_mtx *mutex, long *dst, long value);
+long	get_long(t_mtx *mutex, long *value);
+bool	simulation_finished(t_table *table);
 
 
 #endif // DEBUG
