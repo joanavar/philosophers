@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:03:33 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/25 14:50:17 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:15:57 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	dinner_start(t_table *table)
 		}
 
 	}
+	table->start_simulation = gettime(MILLISECOND);
 	set_bool(&table->table_mutex, &table->all_threads_ready, true);
 }

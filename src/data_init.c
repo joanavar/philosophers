@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:08:00 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/25 16:08:20 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:34:25 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	philo_init(t_table *table)
 		philo->id = i + 1;
 		philo->full_c = false;
 		philo->meals_c = 0;
-		philo->table = table;
+		//philo->table = table;
 		assign_forks(philo, table->forks, i);
 	}
 }

@@ -13,6 +13,16 @@
 
 typedef pthread_mutex_t t_mtx;
 
+typedef enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIE,
+}			t_philo_status;
+
 typedef enum e_opcode
 {
 	LOCK,
@@ -38,6 +48,7 @@ typedef struct s_fork
 	
 }		t_fork;
 
+
 typedef struct s_philo 
 {
 	int			id;
@@ -47,8 +58,7 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thread_id;
-	t_table		*table;
-}		t_philo;
+}				t_philo;	
 
 typedef	struct s_table
 {
@@ -77,6 +87,8 @@ void	parse_imput(t_table *table, char **argv);
 
 //utils.c
 void	error_exit();
+long	gettime(t_time_code time_code);
+void	precise_usleep(long usec, t_table *table);
 
 //safe.c
 void	*safe_malloc(size_t bytes);
