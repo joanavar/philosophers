@@ -12,6 +12,7 @@
 # include "../Libreries/Printf/ft_printf.h"
 
 typedef pthread_mutex_t t_mtx;
+typedef struct s_table	t_table;
 
 typedef enum e_status
 {
@@ -58,9 +59,10 @@ typedef struct s_philo
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thread_id;
+	t_table		*table;
 }				t_philo;	
 
-typedef	struct s_table
+struct s_table
 {
 	long	philo_nbr;
 	long	time_to_die;
@@ -75,7 +77,7 @@ typedef	struct s_table
 	t_fork	*forks;// arrany forks
 	t_philo	*philos;// arrany philos
 
-}				t_table;
+};
 
 
 
