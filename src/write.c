@@ -6,18 +6,17 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:33:52 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/01 17:53:25 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:16:32 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	write_status(t_philo_status status, t_philo *philo, 
-		t_table *table)
+void	write_status(t_philo_status status, t_philo *philo)
 {
 	long elapsed;
 
-	elapsed = gettime(MILLISECOND) - table->start_simulation;
+	elapsed = gettime(MILLISECOND) - philo->table->start_simulation;
 	if (philo->full_c)
 		return ;
 	safe_mutex_handle(&philo->table->write_mutex, LOCK);

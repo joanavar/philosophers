@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:03:33 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/30 15:15:57 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/01 18:50:58 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	*dinner_simulation(void *data)
 
 	philo = (philo*)data;
 	wait_all_threads(philo->table)//PREGUNTAR
+	
+	while (!simulations_finished(philo->table))
+	{
+		if (philo->full_c)
+			break;
+		eat(philo)// falta hacer
+		write_status(SLEEPING, philo, philo->table);
+		precise_usleep(philo->table->time_to_sleep, philo->table);
+	}
 	
 }
 

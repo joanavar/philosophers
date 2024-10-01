@@ -111,5 +111,8 @@ bool	simulation_finished(t_table *table);
 //syncro.utils.c
 void    wait_all_threads(t_table *table);
 
+//write.c
+void	wrtie_status(t_philo_status status, t_philo *philo);
+
 
 #endif // DEBUG
