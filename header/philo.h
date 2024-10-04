@@ -60,6 +60,7 @@ typedef struct s_philo
 	t_fork		*second_fork;
 	pthread_t	thread_id;
 	t_table		*table;
+	t_mtx		philo_mutex;
 }				t_philo;	
 
 struct s_table

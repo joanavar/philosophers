@@ -6,11 +6,28 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:03:33 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/01 18:50:58 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/04 13:41:17 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+
+
+static	void eat(t_philo *philo)
+{
+	safe_mutex_handle(&philo->first_fork->fork, LOCK);
+	write_status(TAKE_FIRST_FORK, philo);
+	safe_mutex_handle(&philo->second_fork->fork, LOCK);
+	write_status(TAKE_SECOND_FORK, philo);
+	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILLISECOND));
+	philo->meals_c++;
+	write_status(EATING, philo);
+	if (philo->table->nbr_limits_meals > 0 && 
+			philo->table->nbr_limits_meals == philo->meals_c)
+		set_bool(&philo->philo_mutex, &philo->full_c, true);
+
+}
 
 void	*dinner_simulation(void *data)
 {

@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:08:00 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/01 16:58:36 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/04 12:22:46 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	philo_init(t_table *table)
 		philo->meals_c = 0;
 		philo->table = table;
 		assign_forks(philo, table->forks, i);
+		safe_mutex_handle(&philo->philo_mutex, INIT);
 	}
 }
 
