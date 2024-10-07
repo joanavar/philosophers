@@ -42,6 +42,8 @@ void	*dinner_simulation(void *data)
 
 	philo = (philo*)data;
 	wait_all_threads(philo->table)//PREGUNTAR
+	increase_long(&philo->table->table_mutex, 
+		&philo->table->threads_running_nbr);
 	
 	while (!simulations_finished(philo->table))
 	{
@@ -73,6 +75,7 @@ void	dinner_start(t_table *table)
 		}
 
 	}
+	safe_thread_handle(&table->monitor, monitor_dinner, table, CREATE);
 	table->start_simulation = gettime(MILLISECOND);
 	set_bool(&table->table_mutex, &table->all_threads_ready, true);
 }

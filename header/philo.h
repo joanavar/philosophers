@@ -73,6 +73,8 @@ struct s_table
 	long	start_simulation;
 	bool	end_simulation;// full_meals or die philo
 	bool	all_threads_ready;
+	long		threads_running_nbr;
+	pthread_t	monitor;
 	t_mtx	table_mutex;
 	t_mtx	write_mutex;
 	t_fork	*forks;// arrany forks
@@ -111,6 +113,8 @@ bool	simulation_finished(t_table *table);
 
 //syncro.utils.c
 void    wait_all_threads(t_table *table);
+bool    all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
+void    increase_long(t_mtx *mutex, long *value);
 
 //write.c
 void	wrtie_status(t_philo_status status, t_philo *philo);
