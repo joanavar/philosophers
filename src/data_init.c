@@ -40,8 +40,8 @@ static void	philo_init(t_table *table)
 		philo->full_c = false;
 		philo->meals_c = 0;
 		philo->table = table;
-		assign_forks(philo, table->forks, i);
 		safe_mutex_handle(&philo->philo_mutex, INIT);
+		assign_forks(philo, table->forks, i);
 	}
 }
 
