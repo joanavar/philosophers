@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:12:27 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/24 16:33:44 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:57:35 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	{
 		table = malloc(sizeof(table));
 		parse_imput(table, argv);
-		data_init(&table);
+		data_init(table);
 	}
 	else 
 	{

@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 17:03:33 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/04 13:41:17 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:54:03 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static	void thinking(t_philo *philo)
 {
-	wrtie_status(THINKING, philo);
+	write_status(THINKING, philo);
 }
 
 void	*lone_philo(void *arg)
@@ -25,8 +25,8 @@ void	*lone_philo(void *arg)
 	philo = (t_philo*)arg;
 	wait_all_threads(philo->table);
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILLISECOND));
-	increase_long(&philo->table->table_mutex, philo->table->threads_running_nbr);
-	wrtie_status(TAKE_FIRST_FORK, philo);
+	increase_long(&philo->table->table_mutex, &philo->table->threads_running_nbr);
+	write_status(TAKE_FIRST_FORK, philo);
 	while (!simulation_finished(philo->table))
 		usleep(200);
 	return (NULL);
@@ -56,22 +56,22 @@ void	*dinner_simulation(void *data)
 	t_philo *philo;
 
 	philo = (t_philo*)data;
-	wait_all_threads(philo->table)//PREGUNTAR
-	set_long(&philo->philo_mutex, philo->last_meal_time, 
+	wait_all_threads(philo->table);//PREGUNTAR
+	set_long(&philo->philo_mutex, &philo->last_meal_time, 
 		gettime(MILLISECOND));
 	increase_long(&philo->table->table_mutex, 
 		&philo->table->threads_running_nbr);
 	
-	while (!simulations_finished(philo->table))
+	while (!simulation_finished(philo->table))
 	{
 		if (philo->full_c)
 			break;
-		eat(philo)// falta hacer
-		write_status(SLEEPING, philo, philo->table);
+		eat(philo);// falta hacer
+		write_status(SLEEPING, philo);
 		precise_usleep(philo->table->time_to_sleep, philo->table);
 		thinking(philo);
 	}
-	
+	return (NULL);
 }
 
 void	dinner_start(t_table *table)
@@ -82,7 +82,7 @@ void	dinner_start(t_table *table)
 	if (0 == table->nbr_limits_meals)
 		return ;
 	else if (1 == table->philo_nbr)
-		safe_thread_handle(table->philos[0].thread.id, lone_philo, 
+		safe_thread_handle(&table->philos[0].thread_id, lone_philo, 
 			&table->philos[0], CREATE);
 	else
 	{

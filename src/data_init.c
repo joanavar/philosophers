@@ -6,13 +6,13 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 18:08:00 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/04 12:22:46 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:20:50 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static assign_forks(t_philo *philo, t_fork *forks, 
+static void	assign_forks(t_philo *philo, t_fork *forks, 
 		int philo_position)
 {
 	int philo_nbr;
@@ -49,13 +49,13 @@ void	data_init(t_table *table)
 {
 	int i;
 
-	i = -1
+	i = -1;
 	table->end_simulation = false;
 	table->all_threads_ready = false;
 	table->threads_running_nbr = 0;
 	table->philos = safe_malloc(sizeof(t_philo) * table->philo_nbr);
-	safe_mutex_handle(table->table_mutex, INIT);
-	safe_mutex_handle(table->write_mutex, INIT);
+	safe_mutex_handle(&table->table_mutex, INIT);
+	safe_mutex_handle(&table->write_mutex, INIT);
 	table->forks = safe_malloc(sizeof(t_fork) * table->philo_nbr);
 	while (++i < table->philo_nbr)
 	{

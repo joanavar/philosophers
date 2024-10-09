@@ -8,6 +8,9 @@
 # include <pthread.h>// mutex
 # include <sys/time.h>// gettimeofday
 # include <limits.h>// INT_MAX AND INT_MIN
+# include <stdint.h>
+# include <string.h>
+# include <errno.h>
 # include "../Libreries/Libft/libft.h"
 # include "../Libreries/Printf/ft_printf.h"
 
@@ -117,7 +120,10 @@ bool    all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
 void    increase_long(t_mtx *mutex, long *value);
 
 //write.c
-void	wrtie_status(t_philo_status status, t_philo *philo);
+void	write_status(t_philo_status status, t_philo *philo);
+
+//monitor.c
+void	*monitor_dinner(void *data);
 
 
 #endif // DEBUG

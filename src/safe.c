@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:57:52 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/20 14:56:06 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:37:34 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	*safe_malloc(size_t bytes)
 
 static void	handle_error_mutex(int status, t_opcode opcode)
 {
+	if (status == 0)
+		return ;
 	if (EINVAL == status && (LOCK == opcode || UNLOCK == opcode
 			|| DESTROY == opcode))
 		error_exit("the value specified by mutex is invalid");
@@ -41,8 +43,6 @@ static void	handle_error_mutex(int status, t_opcode opcode)
 
 void	safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 {
-	if (status == 0)
-		return 0;
 	if (LOCK == opcode)
 		handle_error_mutex(pthread_mutex_lock(mutex), opcode);
 	else if (UNLOCK == opcode)
@@ -58,8 +58,8 @@ void	safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 static void	handle_thread_error(int status, t_opcode opcode)
 {
 	if (status == 0)
-		return 0;
-	if (EINVAL == status && (JOIN == opcode || DETACH == opcode)
+		return ;
+	if (EINVAL == status && (JOIN == opcode || DETACH == opcode))
 		error_exit("thread is not a joinable thread");
 	else if (EDEADLK == status)
 		error_exit("A deadlock was detected or the value of");
@@ -82,9 +82,9 @@ void	safe_thread_handle(pthread_t *thread, void *(foo)(void *),
 		handle_thread_error(pthread_create(thread, NULL, foo, data),
 		 opcode);
 	if (JOIN == opcode)
-		handle_thread_error(pthread_join(thread, NULL), opcode);
+		handle_thread_error(pthread_join(*thread, NULL), opcode);
 	if (DETACH == opcode)
-		handle_thread_error(pthread_detach(thread), opcode);
+		handle_thread_error(pthread_detach(*thread), opcode);
 }
 
 
