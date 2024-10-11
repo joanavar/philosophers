@@ -6,13 +6,12 @@
 #    By: joanavar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 13:44:37 by joanavar          #+#    #+#              #
-#    Updated: 2024/10/11 11:30:00 by joanavar         ###   ########.fr        #
+#    Updated: 2024/10/11 13:50:30 by joanavar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				= philo
 
-LIBFT				= ./Libreries/Libft/libft.a
 PRINTF				= ./Libreries/Printf/libftprintf.a
 INC					= header
 SRC_DIR				= src
@@ -38,11 +37,8 @@ OBJ					= $(addprefix $(OBJ_DIR)/, ${SRCS:.c=.o})
 
 all:				$(NAME)
 
-$(NAME):			$(OBJ) $(LIBFT) $(PRINTF)
-					$(CC) $(CFLAGS) -I $(INC) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
-
-$(LIBFT):
-					@make -C Libreries/Libft
+$(NAME):			$(OBJ) $(PRINTF)
+					$(CC) $(CFLAGS) -I $(INC) $(OBJ) $(PRINTF) -o $(NAME)
 
 $(PRINTF):
 					@make -C Libreries/Printf
@@ -52,16 +48,14 @@ $(OBJ_DIR)/%.o:		$(SRC_DIR)/%.c Makefile $(INC)
 					$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 
 clean:
-					@make $@ -C ./Libreries/Libft
 					@make $@ -C ./Libreries/Printf
 					$(RM) $(OBJ_DIR)
 
 fclean:				clean
 					@$(RM) $(NAME)
-					@make $@ -C ./Libreries/Libft
 					@make $@ -C ./Libreries/Printf
 
 re:					fclean all
 
-.PHONY:				all clean fclean re $(LIBFT) $(PRINTF)
+.PHONY:				all clean fclean re $(PRINTF)
 
