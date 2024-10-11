@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:18:26 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/01 16:59:09 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:45:15 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,4 @@ void	error_exit(char *s)
 	exit(EXIT_FAILURE);
 }
 
-int main(void)
-{
-	long start;
-	start = gettime(MILLISECOND);
-	printf ("%ld in ms\n", start);
 
-	precise_usleep(2000000, NULL);
-	start = gettime(MILLISECOND);
-	printf ("%ld in ms\n", start);
-}

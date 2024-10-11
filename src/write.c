@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:33:52 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/01 19:16:32 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:36:04 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ void	write_status(t_philo_status status, t_philo *philo)
 			printf("%-6ld  %d is sleeping\n", elapsed, philo->id);
 		else if (THINKING == status && !simulation_finished(philo->table))
 			printf("%-6ld  %d is thinking\n", elapsed, philo->id);
-		else if (DIED == status && !simulation_finished(philo->table))
+		else if (DIE == status && !simulation_finished(philo->table))
 			printf("%-6ld  %d died\n", elapsed, philo->id);	
-	}
 	safe_mutex_handle(&philo->table->write_mutex, UNLOCK);
-
-
 }
+

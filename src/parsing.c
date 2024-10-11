@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:12:24 by joanavar          #+#    #+#             */
-/*   Updated: 2024/09/20 16:05:31 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:05:14 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,13 @@ static const char	*valid_input(const char *s)
 	if (!is_digit(s[i]))
 		error_exit("Error isn't digit");
 	nbr = s + i;//s + i == &s[i]
-	while (is_digit(s[i++]))
+	while (is_digit(s[i]))
+	{
+		i++;
 		++len;
+	}
+	if (s[i] != '\0' && !is_digit(s[i]))
+		error_exit("Error isn't digit");
 	if (len > 10)
 		error_exit("Error INT_MAX");
 	return(nbr);

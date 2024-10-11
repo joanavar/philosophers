@@ -6,7 +6,7 @@
 /*   By: joanavar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:57:52 by joanavar          #+#    #+#             */
-/*   Updated: 2024/10/09 17:37:34 by joanavar         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:16:09 by joanavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*safe_malloc(size_t bytes)
 {
 	void	*memory;
 
-	memory = malloc(sizeof(bytes));
+	memory = malloc(bytes);
 	if (!memory)
 		error_exit("Error with malloc");
 	return (memory);

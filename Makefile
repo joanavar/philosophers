@@ -3,80 +3,65 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joanavar <joanavar@student.42.fr>          +#+  +:+       +#+         #
+#    By: joanavar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/16 17:49:35 by joanavar          #+#    #+#              #
-#    Updated: 2024/06/15 12:37:16 by joanavar         ###   ########.fr        #
+#    Created: 2024/10/09 13:44:37 by joanavar          #+#    #+#              #
+#    Updated: 2024/10/11 11:30:00 by joanavar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Standard
-NAME				= push_swap
+NAME				= philo
 
-# Directories
-LIBFT				= ./projects/libft/libft.a
-PRINTF				= ./projects/printf/libftprintf.a
-INC					= ./header/push_swap.h
+LIBFT				= ./Libreries/Libft/libft.a
+PRINTF				= ./Libreries/Printf/libftprintf.a
+INC					= header
 SRC_DIR				= src
 OBJ_DIR				= obj
 
-# Compiler and CFlags
+
 CC					= cc
-CFLAGS				= -Wall -Werror -Wextra
+CFLAGS				= -Wall -Werror -Wextra -fsanitize=address -g
 RM					= rm -rf
 
-# Source Files
-COMMANDS_DIR		=	commands/push.c \
-						commands/rev_rotate.c \
-						commands/rotate.c \
-						commands/sort_stacks.c \
-						commands/sort_three.c \
-						commands/swap.c
+SRCS				=	data_init.c			\
+						init.c				\
+						main.c				\
+						monitor.c			\
+						parsing.c			\
+						safe.c				\
+						setters_getters.c	\
+						syncro_utils.c		\
+						utils.c				\
+						write.c				\
 
-PUSH_SWAP_DIR		=	push_swap/errors.c \
-						push_swap/init_a_to_b.c \
-						push_swap/init_b_to_a.c \
-						push_swap/main.c \
-						push_swap/split.c \
-						push_swap/stack_init.c \
-						push_swap/stack_utils.c
+OBJ					= $(addprefix $(OBJ_DIR)/, ${SRCS:.c=.o})
 
-# Concatenate all source files
-SRCS 				= $(COMMANDS_DIR) $(PUSH_SWAP_DIR)
+all:				$(NAME)
 
-# Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
-OBJ 				= $(addprefix $(OBJ_DIR)/, ${SRCS:.c=.o})
-# Build ruleft_locks
-
-all: 				$(NAME)
-
-$(NAME): 			$(OBJ) $(LIBFT) $(PRINTF)
-					$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
+$(NAME):			$(OBJ) $(LIBFT) $(PRINTF)
+					$(CC) $(CFLAGS) -I $(INC) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
 
 $(LIBFT):
-					@make -C projects/libft
+					@make -C Libreries/Libft
 
 $(PRINTF):
-					@make -C projects/printf
+					@make -C Libreries/Printf
 
-
-# Compile object files from source files
 $(OBJ_DIR)/%.o:		$(SRC_DIR)/%.c Makefile $(INC)
 					@mkdir -p $(OBJ_DIR)
-					@mkdir -p $(OBJ_DIR)/commands
-					@mkdir -p $(OBJ_DIR)/push_swap
 					$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 
 clean:
-					@make $@ -C ./projects/libft
-					@make $@ -C ./projects/printf
+					@make $@ -C ./Libreries/Libft
+					@make $@ -C ./Libreries/Printf
 					$(RM) $(OBJ_DIR)
 
-fclean: 			clean
+fclean:				clean
 					@$(RM) $(NAME)
-					@make $@ -C ./projects/libft
-					@make $@ -C ./projects/printf
+					@make $@ -C ./Libreries/Libft
+					@make $@ -C ./Libreries/Printf
 
-re: 				fclean all
+re:					fclean all
 
-.PHONY: 			all clean fclean re $(LIBFT) $(PRINTF)
+.PHONY:				all clean fclean re $(LIBFT) $(PRINTF)
+
